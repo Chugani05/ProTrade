@@ -5,6 +5,7 @@ class TeamSerializer(BaseSerializer):
         return {
             'id': instance.pk,
             'name': instance.name,
+            'slug': instance.slug,
             'league': instance.get_league_display(),
             'shield': self.build_url(instance.shield.url)
         }

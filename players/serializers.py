@@ -8,7 +8,7 @@ class PlayerSerializer(BaseSerializer):
             'name': instance.name,
             'slug': instance.slug,
             'position': instance.get_position_display(),
-            'birth__date': instance.birth_date.isoformat(),
+            'birth_date': instance.birth_date.isoformat(),
             'market_value': float(instance.market_value),
             'photo': self.build_url(instance.photo.url),
             'team': TeamSerializer(instance.team, request=self.request).serialize()
