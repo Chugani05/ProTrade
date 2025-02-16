@@ -13,10 +13,10 @@ class Player(models.Model):
         max_length=1, choices=Position
     )
     birth_date = models.DateField()
-    market_value = models.DecimalField(max_digits=9, decimal_places=2)
+    market_value = models.DecimalField(max_digits=11, decimal_places=2)
     photo = models.ImageField(
         upload_to='players/photos/', default='players/photos/default.png', blank=True, null=True
     )
     team = models.ForeignKey(
-        'teams.Team', related_name='players', on_delete=models.CASCADE
+        'teams.Team', related_name='players', on_delete=models.CASCADE, null=True, blank=True
     )
