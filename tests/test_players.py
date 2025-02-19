@@ -267,7 +267,7 @@ def test_delete_player_fails_when_unregistered_token(client):
 def test_delete_player_fails_when_player_does_not_exist(client, token):
     player_data = {'slug': 'test-player'}
     status, response = post_json(client, '/api/players/delete/', player_data, token.key)
-    assert status == 400
+    assert status == 404
     assert response == {'error': 'Player not found'}
 
 
