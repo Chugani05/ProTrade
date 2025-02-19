@@ -217,58 +217,58 @@ def test_add_player_fails_when_player_already_exists(client, player, token):
 # ==============================================================================
 
 
-# @pytest.mark.django_db
-# def test_delete_player(client, player, token):
-#     player_data = {'slug': player.slug}
-#     status, response = post_json(client, '/api/players/delete/', player_data, token.key)
-#     assert status == 200
-#     assert response == {'id': player.pk}
-#     assert not Player.objects.filter(slug=player.slug)
+@pytest.mark.django_db
+def test_delete_player(client, player, token):
+    player_data = {'slug': player.slug}
+    status, response = post_json(client, '/api/players/delete/', player_data, token.key)
+    assert status == 200
+    assert response == {'id': player.pk}
+    assert not Player.objects.filter(slug=player.slug)
 
 
-# @pytest.mark.django_db
-# def test_delete_player_fails_when_method_is_not_allowed(client):
-#     status, response = get_json(client, '/api/players/delete/')
-#     assert status == 405
-#     assert response == {'error': 'Method not allowed'}
+@pytest.mark.django_db
+def test_delete_player_fails_when_method_is_not_allowed(client):
+    status, response = get_json(client, '/api/players/delete/')
+    assert status == 405
+    assert response == {'error': 'Method not allowed'}
 
 
-# @pytest.mark.django_db
-# def test_delete_player_fails_when_invalid_json(client):
-#     status, response = post_json(client, '/api/players/delete/', '{')
-#     assert status == 400
-#     assert response == {'error': 'Invalid JSON body'}
+@pytest.mark.django_db
+def test_delete_player_fails_when_invalid_json(client):
+    status, response = post_json(client, '/api/players/delete/', '{')
+    assert status == 400
+    assert response == {'error': 'Invalid JSON body'}
 
 
-# @pytest.mark.django_db
-# def test_delete_player_fails_when_missing_required_fields(client):
-#     status, response = post_json(client, '/api/players/delete/', {})
-#     assert status == 400
-#     assert response == {'error': 'Missing required fields'}
+@pytest.mark.django_db
+def test_delete_player_fails_when_missing_required_fields(client):
+    status, response = post_json(client, '/api/players/delete/', {})
+    assert status == 400
+    assert response == {'error': 'Missing required fields'}
 
 
-# @pytest.mark.django_db
-# def test_delete_player_fails_when_invalid_token(client):
-#     player_data = {'slug': 'test-player'}
-#     status, response = post_json(client, '/api/players/delete/', player_data, 'invalid-token')
-#     assert status == 400
-#     assert response == {'error': 'Invalid authentication token'}
+@pytest.mark.django_db
+def test_delete_player_fails_when_invalid_token(client):
+    player_data = {'slug': 'test-player'}
+    status, response = post_json(client, '/api/players/delete/', player_data, 'invalid-token')
+    assert status == 400
+    assert response == {'error': 'Invalid authentication token'}
 
 
-# @pytest.mark.django_db
-# def test_delete_player_fails_when_unregistered_token(client):
-#     player_data = {'slug': 'test-player'}
-#     status, response = post_json(client, '/api/players/delete/', player_data, str(uuid.uuid4()))
-#     assert status == 401
-#     assert response == {'error': 'Unregistered authentication token'}
+@pytest.mark.django_db
+def test_delete_player_fails_when_unregistered_token(client):
+    player_data = {'slug': 'test-player'}
+    status, response = post_json(client, '/api/players/delete/', player_data, str(uuid.uuid4()))
+    assert status == 401
+    assert response == {'error': 'Unregistered authentication token'}
 
 
-# @pytest.mark.django_db
-# def test_delete_player_fails_when_player_does_not_exist(client, token):
-#     player_data = {'slug': 'test-player'}
-#     status, response = post_json(client, '/api/players/delete/', player_data, token.key)
-#     assert status == 400
-#     assert response == {'error': 'Player not found'}
+@pytest.mark.django_db
+def test_delete_player_fails_when_player_does_not_exist(client, token):
+    player_data = {'slug': 'test-player'}
+    status, response = post_json(client, '/api/players/delete/', player_data, token.key)
+    assert status == 400
+    assert response == {'error': 'Player not found'}
 
 
 # ==============================================================================
